@@ -38,12 +38,38 @@ function generateResume() {
             <p contenteditable="true">${skills}</p>
         </div>
     `;
-
+    const downloadLink = document.createElement('a')
+    downloadLink.href = 'data:text/html;charset=utf-8,' + encodeURIComponent(resumeOutput)
+    donwnloadLink.download = uniquePath;
+    downloadLink.textContent = 'Download Your 2024 Resume';
+     const usernameElement = document.getElementaryById(
+         "username"
+         ) as HTMLInputElement;
     // Display the generated resume
     resumeContent.innerHTML = resumeHTML;
+    resumeOutput.appendChild(downloadLink)
     resumeOutput.style.display = 'block';
+    
 }
-
+// check if all form elements are present
+if (
+    nameElement &&
+    emailElement &&
+    phoneElement &&
+    educationElement &&
+    experienceElement &&
+    skillsElement &&
+    usernameElement &&
+) {
+    const name = nameElement.value;
+    const email = emailElement.value;
+    const phone = phoneElement.value;
+    const education = educationElement.value;
+    const experience = experienceElement.value;
+    const skills = skillsElement.value;
+    const username = usernameElement.value;
+    const uniquePath = `resumes/${username.replace(/\s+/g, '_')}_cv.html`
+}
 // Add event listener to the generate resume button
 generateResumeBtn.addEventListener('click', generateResume);
 
